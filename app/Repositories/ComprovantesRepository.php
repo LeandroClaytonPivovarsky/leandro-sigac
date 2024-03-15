@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repositories;
+
 use App\Models\Comprovante;
 use App\Repositories\Repository;
 

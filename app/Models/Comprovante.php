@@ -15,7 +15,7 @@ class Comprovante extends Model
 
     public function declaracao()
     {
-        return $this->hasMany(Declaracao::class);
+        return $this->hasOne(Declaracao::class);
     }
 
     public function aluno()

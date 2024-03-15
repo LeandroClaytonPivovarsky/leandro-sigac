@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\EixoController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\CursoController;
@@ -23,3 +24,4 @@ Route::get('/', function () {
 Route::resource('/eixo', EixoController::class)->names('CRUD_Eixo');
 Route::resource('/nivel', LevelController::class)->names('CRUD_Nivel');
 Route::resource('/curso', CursoController::class)->names('CRUD_Cursos');
+Route::resource('/aluno', AlunoController::class)->names('CRUD_Aluno');

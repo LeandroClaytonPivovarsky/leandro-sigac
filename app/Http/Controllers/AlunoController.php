@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use AlunosRepository;
+use App\Repositories\AlunoRepository;
 use App\Models\Aluno;
 use App\Repositories\CursoRepository;
+use App\Repositories\TurmasRepository;
+use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
-use TurmasRepository;
-use UsersRepository;
 
 class AlunoController extends Controller
 {
     protected $repository;
 
     public function __construct() {
-        $this->repository = new AlunosRepository;
+        $this->repository = new AlunoRepository();
     }
 
     /**
@@ -22,7 +22,7 @@ class AlunoController extends Controller
      */
     public function index()
     {
-        return $this->repository->selectAllWith(['user', 'curso', turma]);
+        return $this->repository->selectAllWith(['user', 'curso', 'turma']);
     }
 
     /**
@@ -59,7 +59,7 @@ class AlunoController extends Controller
 
             $data->turma()->associate($turma);
 
-            $this->repository->store($data);
+            $this->repository->save($data);
 
             return "O aluno $request->nome Foi cadastrado com sucesso";
 
@@ -74,7 +74,26 @@ class AlunoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = $this->repository->findById($id);
+        
+        if (isset($data)) {
+
+            $user = (new UsersRepository())->findById($data->user_id);
+
+            $turma = (new TurmasRepository())->findById($data->user_id);
+
+            $curso = (new CursoRepository())->findById($data->curso_id);
+            if (isset($curso,$turma,$user)) {
+
+                $data->user()->associate($user);    
+                $data->curso()->associate($curso);
+                $data->turma()->associate($turma);
+                
+                return $data;
+            }
+        }
+        
+        return "O Aluno não foi encontrado!!";
     }
 
     /**
@@ -82,7 +101,7 @@ class AlunoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+
     }
 
     /**
@@ -90,7 +109,42 @@ class AlunoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $this->repository->findById($id);
+
+        $nomeAntigo = $data->nome;
+
+        if (isset($data)) {
+
+            $user = (new UsersRepository())->findById($request->user_id);
+
+            $turma = (new TurmasRepository())->findById($request->turma_id);
+
+            $curso = (new CursoRepository())->findById($request->curso_id);
+
+            if (isset($curso,$turma,$user)) {
+
+                $data->nome = mb_strtoupper($request->nome);
+
+                $data->cpf = mb_strtoupper($request->cpf);
+
+                $data->email = mb_strtoupper($request->email);
+
+                $data->password = $request->password;
+
+                $data->user()->associate($user);  
+                
+                $data->curso()->associate($curso);
+
+                $data->turma()->associate($turma);
+
+                $this->repository->save($data);
+                
+                return "O Usuário $nomeAntigo foi alterado Para $data->nome com sucesso";
+            }
+            return "Alguma informação foi inserida errada";
+        }
+
+        return "Não foi encontrado nenhum aluno!!";
     }
 
     /**
@@ -98,6 +152,16 @@ class AlunoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = $this->repository->findById($id);
+
+        if (isset($data)) {
+            $nomeAluno = $data->nome;
+            $this->repository->delete($id);
+
+            return "O $nomeAluno foi excluido com sucesso";
+        }
+
+        return "Não há nada para ser excluído com estas informações";
+
     }
 }

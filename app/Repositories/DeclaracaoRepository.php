@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repositories;
+
 use App\Models\Declaracao;
 use App\Repositories\Repository;
 

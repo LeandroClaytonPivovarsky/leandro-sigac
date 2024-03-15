@@ -22,4 +22,19 @@ class Curso extends Model
     {
         return $this->belongsTo(Nivel::class);
     }
+
+    public function aluno()
+    {
+        return $this->hasManyTo(Aluno::class);
+    }
+
+    public function turma()
+    {
+        return $this->hasManyTo(Turma::class);
+    }
+
+    public function categoria()
+    {
+        return $this->hasManyTo(Categoria::class);
+    }
 }

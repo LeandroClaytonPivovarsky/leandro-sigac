@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('curso_id');
             $facilitador->chaveEstrangeira('curso_id', 'cursos');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

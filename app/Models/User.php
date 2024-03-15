@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 use App\Models\Aluno;
 use App\Models\Comprovante;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,11 +34,11 @@ class User extends Model{
 
     public function aluno()
     {
-        return $this->hasMany(Aluno::class);
+        return $this->hasOne(Aluno::class);
     }
 
     public function comprovante()
     {
-        return $this->hasMany(Comprovante::class);
+        return $this->hasManyTo(Comprovante::class);
     }
 }

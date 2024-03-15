@@ -6,7 +6,8 @@ use App\Models\Curso;
 use App\Repositories\CursoRepository;
 use App\Repositories\EixoRepository;
 use App\Repositories\NivelRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Http\Request;
+
 class CursoController extends Controller
 {
 
