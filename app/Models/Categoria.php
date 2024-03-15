@@ -11,4 +11,19 @@ class Categoria extends Model
     use SoftDeletes;
 
     use HasFactory;
+
+    public function documento()
+    {
+        return $this->hasMany(Documento::class);
+    }
+
+    public function comprovante()
+    {
+        return $this->hasMany(Comprovante::class);
+    }
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class);
+    }
 }
