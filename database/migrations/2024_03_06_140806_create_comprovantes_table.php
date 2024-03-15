@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('atividade');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('aluno_id');
+            $facilitador->chaveEstrangeira('categoria_id', 'categorias');
+            $facilitador->chaveEstrangeira('aluno_id', 'alunos');
+            $facilitador->chaveEstrangeira('user_id', 'users');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class EixoSeeder extends Seeder
+class NivelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,9 @@ class EixoSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ["nome" => "INFORMAÇÃO E COMUNICAÇÃO"],
-            ["nome" => "RECURSOS NATURAIS"],
-            ["nome" => "CIÊNCIAS HUMANAS"],
+            ["nome" => "ENSINO MÉDIO INTEGRADO"],
+            ["nome" => "GRADUAÇÃO"],
         ];
-        DB::table('eixos')->insert($data);
+        DB::table('niveis')->insert($data);
     }
 }

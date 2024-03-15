@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('permission', function (Blueprint $table) {
+        Schema::create('permissions', function (Blueprint $table) {
             $facilitador = new Facilitador($table);
             $table->unsignedBigInteger('role_id');
             $table->unsignedBigInteger('resource_id');
             $table->boolean('permission');
             $facilitador->chaveEstrangeira('role_id','roles');
             $facilitador->chaveEstrangeira('resource_id','resources');
-            $table->primary('role_id');
-            $table->primary('resource_id');
+            $table->primary(['role_id', 'resource_id']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('permission');
+        Schema::dropIfExists('permissions');
     }
 };

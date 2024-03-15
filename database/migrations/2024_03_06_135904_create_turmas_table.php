@@ -19,7 +19,7 @@ return new class extends Migration
             
             $table->id();
             $table->integer('ano');
-            $table->unsignedBigInteger('id_eixo');
+            $table->unsignedBigInteger('curso_id');
             $facilitador->chaveEstrangeira('curso_id', 'cursos');
             $table->timestamps();
         });
