@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\PermissionsRepository;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct() {
+        $this->repository = new PermissionsRepository();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->repository->selectAll();
     }
 
     /**
