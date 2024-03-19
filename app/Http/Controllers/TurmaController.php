@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Turma;
+use App\Repositories\CursoRepository;
+use App\Repositories\TurmasRepository;
 use Illuminate\Http\Request;
 
 class TurmaController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct()  {
+        $this->repository = new TurmasRepository();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->repository->selectAllWith(['curso']);
     }
 
     /**
@@ -27,7 +36,14 @@ class TurmaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $curso = (new CursoRepository())->findById($request->curso_id);
+
+        if (isset($curso)) {
+            $newData = new Turma();
+
+            $newData->curso()->associate($curso);
+            
+        }
     }
 
     /**

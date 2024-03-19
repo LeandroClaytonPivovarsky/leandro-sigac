@@ -70,7 +70,7 @@ class LevelController extends Controller
             $nomeAntigo = $this->repository->findById($id)->nome;
             $objeto->nome = mb_strtoupper($request->nome, 'UTF-8');
             $this->repository->save($objeto);
-            return "<h1>O OBJETO \"$nomeAntigo\" \nFOI ALTERADO PARA \"$objeto->nome\" COM SUCESSO!!</h1>";
+            return "<h1>O OBJETO \"$nomeAntigo\" \nFOI ALTERADO PARA\n \"$objeto\" COM SUCESSO!!</h1>";
         }
 
         return 'NÃO FOI ENCONTRADO OBJETO COM ESTE ID';
