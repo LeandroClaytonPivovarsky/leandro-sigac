@@ -10,8 +10,6 @@ class Permission extends Model
 {
     use HasFactory;
 
-    protected $table = "permission_resource";
-
     private static $keys = ['role_id', 'resource_id'];
 
     public function role()

@@ -39,6 +39,7 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $role = (new RoleRepository())->findById($request->role_id);
+
         $resource = (new ResourceRepository())->findById($request->resource_id);
 
         if (isset($resource, $role)) {
@@ -51,7 +52,11 @@ class PermissionController extends Controller
             $newData->permission = $request->permission;
 
             $this->repository->save($newData);
+
+            return "A PERMISSÃO FOI CRIADA WOW";
         }
+
+        return "NÃO FOI ENCONTRADA ALGUMA COISA";
     }
 
     /**
@@ -67,6 +72,14 @@ class PermissionController extends Controller
 
             ['role', 'resource'] 
         );
+        
+        $msg = "";
+
+        isset($data)
+        ?   $msg = $data
+        :   $msg = "Não foi encontrado essa permissão";
+
+        return $msg;
     }
 
     /**
@@ -87,7 +100,7 @@ class PermissionController extends Controller
             explode("_", $id) 
         );
 
-        if (isset($data)){
+        if (isset($obj)){
             $role = (new RoleRepository())->findById($request->role_id);
             $resource = (new ResourceRepository())->findById($request->resource_id);
 
@@ -106,7 +119,7 @@ class PermissionController extends Controller
             ))
             {
 
-                return "<h1>Upate - OK!</h1>";
+                return "<h1>Update - OK!</h1>";
 
             }
         }

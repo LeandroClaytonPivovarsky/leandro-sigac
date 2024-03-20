@@ -6,7 +6,7 @@ use App\Models\Declaracao;
 use Illuminate\Http\Request;
 use App\Repositories\DeclaracaoRepository;
 use App\Repositories\AlunoRepository;
-use App\Repositories\ComprovantesRepository;
+use App\Repositories\ComprovanteRepository;
 
 class DeclaracaoController extends Controller
 {
@@ -37,14 +37,14 @@ class DeclaracaoController extends Controller
     public function store(Request $request)
     {
         $aluno = (new AlunoRepository())->findById($request->aluno_id);
-        $comprovante = (new ComprovantesRepository())->findById($request->comprovante_id);
+        $comprovante = (new ComprovanteRepository())->findById($request->comprovante_id);
 
         if(isset($aluno, $comprovante)){
             $data = new Declaracao;
 
             $data->hash = $request->hash;
 
-            $data->date = $request->date;
+            $data->data = $request->data;
 
             $data->aluno()->associate($aluno);
 
@@ -67,9 +67,9 @@ class DeclaracaoController extends Controller
         
         if (isset($data)) {
 
-            $aluno = (new AlunoRepository())->findById($data->user_id);
+            $aluno = (new AlunoRepository())->findById($data->aluno_id);
 
-            $comprovante = (new ComprovantesRepository())->findById($data->user_id);
+            $comprovante = (new ComprovanteRepository())->findById($data->comprovante_id);
 
             if (isset($aluno, $comprovante)) {
 

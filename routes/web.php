@@ -35,7 +35,7 @@ Route::resource('/nivel', NivelController::class)->names('CRUD_Nivel');
 Route::resource('/curso', CursoController::class)->names('CRUD_Cursos');
 Route::resource('/aluno', AlunoController::class)->names('CRUD_Aluno');
 Route::resource('/permission', PermissionController::class)->names('CRUD_Permission');
-Route::resource('/user', UserController::class)->names('CRUD_User');
+Route::resource('/usuario', UserController::class)->names('CRUD_User');
 Route::resource('/turma', TurmaController::class)->names('CRUD_Turma');
 Route::resource('/categoria', CategoriaController::class)->names('CRUD_Categoria');
 Route::resource('/declaracao', DeclaracaoController::class)->names('CRUD_Declaracao');

@@ -11,7 +11,6 @@ class Role extends Model{
 
     use HasFactory;
 
-    use SoftDeletes;
 
     public function user()
     {
@@ -20,7 +19,7 @@ class Role extends Model{
 
     public function resource()
     {
-        return $this->belongsToMany(Resource::class, 'permisson');
+        return $this->belongsToMany(Resource::class, 'permissons');
     }
 
 }

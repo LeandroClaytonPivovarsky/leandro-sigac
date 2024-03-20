@@ -95,6 +95,7 @@ class TurmaController extends Controller
         $antigoAno = $data->ano;
 
         if (isset($data)) {
+            
             $curso = (new CursoRepository())->findById($request->curso_id);
 
             if (isset($curso)) {

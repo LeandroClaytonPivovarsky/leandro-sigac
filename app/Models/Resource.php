@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Resource extends Model
@@ -14,6 +13,6 @@ class Resource extends Model
 
     public function role()
     {
-        return $this->belongsToMany(Role::class, 'permission');
+        return $this->belongsToMany(Role::class, 'permissions');
     }
 }

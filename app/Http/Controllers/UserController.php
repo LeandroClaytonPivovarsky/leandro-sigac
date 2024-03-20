@@ -54,7 +54,7 @@ class UserController extends Controller
 
             $this->repository->save($data);
 
-            return "O usuer $request->nome foi cadastrada com sucesso";
+            return "O user $request->nome foi cadastrada com sucesso";
 
         }
 
@@ -107,7 +107,7 @@ class UserController extends Controller
         if (isset($data)) {
 
             $curso = (new CursoRepository())->findById($request->curso_id);
-            $role = (new RoleRepository())->findById($request->role);
+            $role = (new RoleRepository())->findById($request->role_id);
 
             if (isset($curso, $role)) {
 
