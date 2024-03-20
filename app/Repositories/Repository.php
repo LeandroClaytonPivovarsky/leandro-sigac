@@ -15,7 +15,7 @@ class Repository{
 
     public function selectAll()
     {
-        return $this->model->All();
+        return $this->model->all();
     }
 
     public function selectAllWith(array $orm)
@@ -97,11 +97,11 @@ class Repository{
 
     public function deleteCompositeId($keys, $ids, $table) {
         try {
-        DB::table($table)->where($this->createRule($keys, $ids))->delete();
+        DB::table($table)->where($this->createRule('role_id', 1))->delete();
         return true;
         } catch(Exception $e) { dd($e); }
         return false;
-        }
+    }
 
     public function restore($id)
     {
@@ -119,11 +119,14 @@ class Repository{
 
     public function updateCompositeId($keys, $ids, $table, $values) {
         try {
-        DB::table($table)
-        ->where($this->createRule($keys, $ids))
-        ->update($values);
-        return true;
+
+            DB::table($table)
+            ->where($this->createRule($keys, $ids))
+            ->update($values);
+
+            return true;
         } catch(Exception $e) { dd($e); }
+
         return false;
     }
 

@@ -44,18 +44,18 @@ class User extends Authenticable{
     ];
 
     public function role() {
-        return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo(Role::class);
     }
 
     public function curso() {
-        return $this->belongsTo('App\Models\Curso');
+        return $this->belongsTo(Curso::class);
     }
 
     public function aluno() {
-        return $this->hasOne('App\Models\Aluno');
+        return $this->hasOne(Aluno::class);
     }
 
     public function comprovante() {
-        return $this->hasManyTo('App\Models\Comprovante');
+        return $this->hasManyTo(Comprovante::class);
     }
 }
