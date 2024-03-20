@@ -40,7 +40,7 @@ class TurmaController extends Controller
 
         if (isset($curso)) {
             $newData = new Turma();
-
+            
             $newData->curso()->associate($curso);
 
             $newData->ano = $request->ano;

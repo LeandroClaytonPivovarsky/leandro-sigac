@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comprovante;
+use App\Repositories\AlunoRepository;
+use App\Repositories\ComprovantesRepository;
+use App\Repositories\DeclaracaoRepository;
 use Illuminate\Http\Request;
 
 class ComprovanteController extends Controller
@@ -30,7 +34,7 @@ class ComprovanteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
     }
 
     /**
