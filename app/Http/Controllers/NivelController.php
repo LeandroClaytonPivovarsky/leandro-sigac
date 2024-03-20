@@ -7,12 +7,12 @@ use App\Repositories\NivelRepository;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
-class LevelController extends Controller
+class NivelController extends Controller
 {
     protected $repository;
 
     public function __construct() {
-        $this->repository = new NivelRepository;
+        $this->repository = new NivelRepository();
     }
 
     /**
@@ -84,9 +84,9 @@ class LevelController extends Controller
 
         $mensagem = "";
 
-        $this->repository->delete($id) ? 
-        $mensagem = "O OBJETO DE ID $id FOI DELETADO":
-        $mensagem = "NÃO FOI ENCONTRADO NENHUM BOJETO COM ESTE ID";
+        $this->repository->delete($id) 
+            ?   $mensagem = "O OBJETO DE ID $id FOI DELETADO"
+            :   $mensagem = "NÃO FOI ENCONTRADO NENHUM BOJETO COM ESTE ID";
 
         return $mensagem;
 

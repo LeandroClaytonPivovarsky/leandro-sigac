@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Repositories\AlunoRepository;
 use App\Models\Aluno;
 use App\Repositories\CursoRepository;
-use App\Repositories\TurmasRepository;
-use App\Repositories\UsersRepository;
+use App\Repositories\TurmaRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -38,9 +38,9 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        $user = (new UsersRepository())->findById($request->user_id);
+        $user = (new UserRepository())->findById($request->user_id);
         $curso = (new CursoRepository())->findById($request->curso_id);
-        $turma = (new TurmasRepository())->findById($request->turma_id);
+        $turma = (new TurmaRepository())->findById($request->turma_id);
         
         if (isset($user, $turma, $curso)) {
             $data = new Aluno();
@@ -78,9 +78,9 @@ class AlunoController extends Controller
         
         if (isset($data)) {
 
-            $user = (new UsersRepository())->findById($data->user_id);
+            $user = (new UserRepository())->findById($data->user_id);
 
-            $turma = (new TurmasRepository())->findById($data->user_id);
+            $turma = (new TurmaRepository())->findById($data->user_id);
 
             $curso = (new CursoRepository())->findById($data->curso_id);
             if (isset($curso,$turma,$user)) {
@@ -115,9 +115,9 @@ class AlunoController extends Controller
 
         if (isset($data)) {
 
-            $user = (new UsersRepository())->findById($request->user_id);
+            $user = (new UserRepository())->findById($request->user_id);
 
-            $turma = (new TurmasRepository())->findById($request->turma_id);
+            $turma = (new TurmaRepository())->findById($request->turma_id);
 
             $curso = (new CursoRepository())->findById($request->curso_id);
 

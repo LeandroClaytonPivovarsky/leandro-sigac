@@ -92,7 +92,7 @@ class ResourceController extends Controller
     public function destroy(string $id)
     {
         $msg = "";
-        $this->repository->delete($id) == false 
+        $this->repository->delete($id)
             ? $msg = "Deletado com sucesso"
             : $msg = "Não foi encontrado nenhuma inserção com o que foi passado";
 

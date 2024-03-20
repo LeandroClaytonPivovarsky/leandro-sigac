@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Declaracao;
+use App\Repositories\DeclaracaoRepository;
 use Illuminate\Http\Request;
 
-class ProofController extends Controller
+class DeclaracaoController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct() {
+        $this->repository = new DeclaracaoRepository();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->repository->selectAllWith(['aluno', 'comprovante']);
     }
 
     /**
@@ -19,7 +27,7 @@ class ProofController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -46,19 +54,6 @@ class ProofController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+
 }

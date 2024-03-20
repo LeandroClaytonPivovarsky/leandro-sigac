@@ -21,7 +21,6 @@ return new class extends Migration
             $facilitador->chaveEstrangeira('role_id','roles');
             $facilitador->chaveEstrangeira('resource_id','resources');
             $table->primary(['role_id', 'resource_id']);
-            $table->softDeletes();
             $table->timestamps();
         });
     }

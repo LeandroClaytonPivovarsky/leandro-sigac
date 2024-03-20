@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EixoController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\DeclaracaoController;
+use App\Http\Controllers\NivelController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UserController;
@@ -28,9 +31,11 @@ Route::get('/', function () {
 
 
 Route::resource('/eixo', EixoController::class)->names('CRUD_Eixo');
-Route::resource('/nivel', LevelController::class)->names('CRUD_Nivel');
+Route::resource('/nivel', NivelController::class)->names('CRUD_Nivel');
 Route::resource('/curso', CursoController::class)->names('CRUD_Cursos');
 Route::resource('/aluno', AlunoController::class)->names('CRUD_Aluno');
 Route::resource('/permission', PermissionController::class)->names('CRUD_Permission');
 Route::resource('/user', UserController::class)->names('CRUD_User');
 Route::resource('/turma', TurmaController::class)->names('CRUD_Turma');
+Route::resource('/categoria', CategoriaController::class)->names('CRUD_Categoria');
+Route::resource('/declaracao', DeclaracaoController::class)->names('CRUD_Declaracao');

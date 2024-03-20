@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class Repository{
     
@@ -48,6 +49,14 @@ class Repository{
         return $this->model->where($column, $value)->get()->first();
     }
 
+    public function findByCompositeId($keys, $ids) {
+        return $this->model::where($this->createRule($keys, $ids))->first();
+    }
+
+    public function findByCompositeIdWith($keys, $ids, $orm) {
+        return $this->model::with($orm)->where($this->createRule($keys, $ids))->first();
+    }
+
     public function save($obj)
     {
         try {
@@ -86,6 +95,14 @@ class Repository{
         return false;
     }
 
+    public function deleteCompositeId($keys, $ids, $table) {
+        try {
+        DB::table($table)->where($this->createRule($keys, $ids))->delete();
+        return true;
+        } catch(Exception $e) { dd($e); }
+        return false;
+        }
+
     public function restore($id)
     {
         $obj = $this->findDeletedById($id);
@@ -98,5 +115,24 @@ class Repository{
             }
         }
         return false;
+    }
+
+    public function updateCompositeId($keys, $ids, $table, $values) {
+        try {
+        DB::table($table)
+        ->where($this->createRule($keys, $ids))
+        ->update($values);
+        return true;
+        } catch(Exception $e) { dd($e); }
+        return false;
+    }
+
+
+    public function createRule($keys, $ids) {
+        $arr = array();
+        for($pos=0; $pos<count($ids); $pos++) {
+        $arr[$pos] = [ $keys[$pos], (integer) $ids[$pos] ];
+        }
+        return $arr;
     }
 }

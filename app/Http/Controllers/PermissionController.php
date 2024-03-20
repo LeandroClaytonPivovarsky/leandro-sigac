@@ -59,22 +59,14 @@ class PermissionController extends Controller
      */
     public function show(string $id)
     {
-        $data = $this->repository->findById($id);
+        $data = $this->repository->findByCompositeIdWith(
 
-        if (isset($data)){
-            $role = (new RoleRepository())->findById($data->role_id);
-            $resource = (new ResourceRepository())->findById($data->resource_id);
+            Permission::getKeys(),
 
-            if (isset($resource, $role)){
-                
-                $data->role()->associate($role);
+            explode('_', $id),
 
-                $data->resource()->associate($resource);
-
-                return $data;
-            }
-    
-        }
+            ['role', 'resource'] 
+        );
     }
 
     /**
@@ -90,25 +82,33 @@ class PermissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = $this->repository->findById($id);
+        $obj = $this->repository->findByCompositeId(
+            Permission::getKeys(), 
+            explode("_", $id) 
+        );
 
         if (isset($data)){
             $role = (new RoleRepository())->findById($request->role_id);
             $resource = (new ResourceRepository())->findById($request->resource_id);
 
-            if (isset($resource, $role)){
-                
-                $data->role()->associate($role);
+            if ($this->repository->updateCompositeId(
 
-                $data->resource()->associate($resource);
+                    Permission::getKeys(), // keys
 
-                $data = $request->permission;
+                    explode("_", $id), // ids
 
-                $this->repository->save($data);
+                    "permissions", // table
 
-                return "Objeto salvo com sucesso";
+                    [ // values
+                        "permission" => $request->permissao
+                    ]
+
+            ))
+            {
+
+                return "<h1>Upate - OK!</h1>";
+
             }
-    
         }
 
         return "Não foi possivel encontrar o objeto";
@@ -119,13 +119,23 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        $msg = "";
-        
-        $this->repository->delete($id) == false
-            ? $msg = "Deletado com sucesso!"
-            : $msg = "Não foi possível deletar o objeto";
+        if($this->repository->deleteCompositeId(
 
-        return $msg;
+                Permission::getKeys(), // keys
+
+                explode("_", $id), // ids
+
+                "permissions" // table
+
+        ))
+        {
+
+            return "<h1>Delete - OK!</h1>";
+
+        }
+
+        return "<h1>Delete - Not found Eixo!</h1>";
+
         
     }
 }

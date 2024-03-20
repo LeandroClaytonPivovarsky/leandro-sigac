@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DeclarationController extends Controller
+class ComprovanteController extends Controller
 {
+
+    protected $repository;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        
     }
 
     /**

@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct() {
+        $this->repository = new UserRepository();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return $this->repository->selectAllWith(['role', 'curso']);
     }
 
     /**
@@ -19,7 +28,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -43,7 +51,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**

@@ -11,9 +11,8 @@ class Resource extends Model
 {
     use HasFactory;
 
-    use SoftDeletes;
 
-    public function permission()
+    public function role()
     {
         return $this->belongsToMany(Role::class, 'permission');
     }
