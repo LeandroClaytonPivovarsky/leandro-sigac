@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comprovante;
+use App\Repositories\AlunoRepository;
+use App\Repositories\ComprovantesRepository;
+use App\Repositories\DeclaracaoRepository;
 use Illuminate\Http\Request;
 
 class DeclarationController extends Controller
 {
+
+    protected $repository;
+
+    public function __construct() {
+        $this->repository = new DeclaracaoRepository();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data = $this->repository->selectAllWith(['aluno', 'comprovante']);
     }
 
     /**
@@ -27,7 +38,7 @@ class DeclarationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     
     }
 
     /**
